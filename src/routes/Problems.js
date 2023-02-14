@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { dbService } from "../fbase";
 import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import "./Problems.css";
 
 function Problems() {
   const [problems, setProblems] = useState([]);
@@ -23,29 +24,32 @@ function Problems() {
   }, []);
 
   return (
-    <>
-      <h1>Problems</h1>
-      {problems.map(function (problem) {
-        return (
-          <div key={problem.id}>
-            <h5
-              onClick={() => {
-                navigate(`/problem/${problem.id}`, {
-                  state: {
-                    title: problem.title,
-                    detail: problem.detail,
-                    input: problem.input,
-                    output: problem.output,
-                  },
-                });
-              }}
-            >
-              {problem.title}
-            </h5>
-          </div>
-        );
-      })}
-    </>
+    <div className="container">
+      <h1 id='title'>Problems</h1>
+      <div className="problems-list">
+        {problems.map(function (problem) {
+          return (
+            <div key={problem.id} className="problem">
+              <h5
+                onClick={() => {
+                  navigate(`/problem/${problem.id}`, {
+                    state: {
+                      title: problem.title,
+                      detail: problem.detail,
+                      input: problem.input,
+                      output: problem.output,
+                    },
+                  });
+                }}
+                className="problem-title"
+              >
+                {problem.title}
+              </h5>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 

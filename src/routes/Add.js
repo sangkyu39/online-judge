@@ -49,11 +49,46 @@ function Add() {
   return (
     <div className="container">
       <h4>문제 추가</h4>
-        <input type="text" value={title} onChange={onChange} name="title" required/><br />
-        <textarea value={detail} onChange={onChange} name="detail" className="text-area" required/> <br />
-        <textarea value={input} onChange={onChange} name="input" className="text-area" /> <br />
-        <textarea value={output} onChange={onChange} name="output" className="text-area" required />
-        <input type="button" className="btn btn-primary" value="추가" onClick={onSubmit}></input>
+      <h5>문제 제목</h5>
+      <input
+        type="text"
+        value={title}
+        onChange={onChange}
+        name="title"
+        required
+      />
+      <br />
+      <h5>문제 설명</h5>
+      <textarea
+        value={detail}
+        onChange={onChange}
+        name="detail"
+        className="text-area"
+        required
+      />
+      <br />
+      <h5>입력</h5>
+      <textarea
+        value={input}
+        onChange={onChange}
+        name="input"
+        className="text-area"
+      />
+      <br />
+      <h5>출력</h5>
+      <textarea
+        value={output}
+        onChange={onChange}
+        name="output"
+        className="text-area"
+        required
+      />
+      <input
+        type="button"
+        className="btn btn-primary"
+        value="추가"
+        onClick={onSubmit}
+      ></input>
     </div>
   );
 }
