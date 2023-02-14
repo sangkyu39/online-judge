@@ -1,0 +1,10 @@
+.text-area {
+    height: 10rem;
+    width: 60%;
+    resize: none;
+    margin: 3%;
+}
+
+.form-area {
+    height: 80%;
+}
