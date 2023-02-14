@@ -4,9 +4,10 @@ import Home from "../routes/Home";
 import Login from "../routes/Login";
 import Problem from "../routes/Problem";
 import Problems from "../routes/Problems";
+import User from "../routes/User";
 import Navigation from "./Navigation";
 
-function AppRouter() {
+function AppRouter(params) {
   return (
     <>
       <Navigation />
@@ -18,7 +19,11 @@ function AppRouter() {
         <Route path="/problem/:id" element={<Problem />} />
 
         <Route path="/add" element={<Add />} />
-        <Route path="/user" element={<Login />} />
+        {params.isLoggedIn ? (
+          <Route path="/user" element={<User />} />
+        ) : (
+          <Route path="/user" element={<Login />} />
+        )}
       </Routes>
     </>
   );
