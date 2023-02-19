@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { authService, dbService } from "../fbase";
 import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import "./Login.css";
 
 function Login(props) {
   const [email, setEmail] = useState("");
@@ -29,17 +30,6 @@ function Login(props) {
       setUserName(value);
     }
   };
-
-  async function addUser(userObj) {
-    try {
-      const doc = await addDoc(collection(dbService,"user"),{
-        userName,
-        userId : userObj.id
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  }
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -53,7 +43,6 @@ function Login(props) {
             addUser(user);
           }
         });
-        console.log("Document written with ID: ", doc.id);
       } else {
         data = await signInWithEmailAndPassword(auth, email, password);
       }
@@ -74,22 +63,8 @@ function Login(props) {
         <Modal.Title id="contained-modal-title-vcenter">로그인</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div>
-          {newAccount ? (
-            <div>
-            <input
-              name="username"
-              type="text"
-              placeholder="이름"
-              required
-              value={userName}
-              onChange={onChange}
-            />
-          </div>
-          ) : (
-            <>
-            </>
-          )}
+        <div className="container">
+          <div className="text-div">
           <input
             name="email"
             type="text"
@@ -97,7 +72,10 @@ function Login(props) {
             required
             value={email}
             onChange={onChange}
+            className="text-area"
           />
+          </div>
+          <div className="text-div">
           <input
             name="password"
             type="password"
@@ -105,21 +83,23 @@ function Login(props) {
             required
             value={password}
             onChange={onChange}
+            className="text-area"
           />
+          </div>
+          <div className="text-div">
           <input
             type="button"
+            className="submit-btn text-area"
             onClick={onSubmit}
-            value={newAccount ? "Create Account" : "Sign In"}
+            value={newAccount ? "계정 생성" : "로그인"}
           />
+          </div>
           {error}
           <span onClick={toggleAccount}>
             {newAccount ? "로그인" : "새로운 계정 만들기"}
           </span>
         </div>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
   );
 }
