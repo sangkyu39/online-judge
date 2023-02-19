@@ -10,15 +10,15 @@ import Navigation from "./Navigation";
 function AppRouter(params) {
   return (
     <>
-      <Navigation />
+      <Navigation isLoggedIn={params.isLoggedIn} />
       <Routes>
         {/* main home */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home  />} />
         {/* problems */}
         <Route path="/problems" element={<Problems />} />
         <Route path="/problem/:id" element={<Problem />} />
 
-        <Route path="/add" element={<Add />} />
+        <Route path="/add" element={<Add userObj={params.userObj}/>} />
         {params.isLoggedIn ? (
           <Route path="/user" element={<User />} />
         ) : (
