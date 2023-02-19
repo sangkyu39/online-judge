@@ -40,7 +40,7 @@ function Navigation(props) {
                 로그인
               </Nav.Link>
 
-              <Login show={modalShow} onHide={() => setModalShow(false)} />
+              <Login show={modalShow} onHide={() => setModalShow(false)}/>
             </div>
           )}
         </Nav>

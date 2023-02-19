@@ -57,7 +57,6 @@ function Add(params) {
     } catch (error) {
       console.log(error);
     }
-    return console.log("clicked");
   }
 
   return (

@@ -19,11 +19,6 @@ function AppRouter(params) {
         <Route path="/problem/:id" element={<Problem />} />
 
         <Route path="/add" element={<Add userObj={params.userObj}/>} />
-        {params.isLoggedIn ? (
-          <Route path="/user" element={<User />} />
-        ) : (
-          <Route path="/user" element={<Login />} />
-        )}
       </Routes>
     </>
   );

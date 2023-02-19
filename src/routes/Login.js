@@ -6,12 +6,15 @@ import {
 } from "firebase/auth";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { authService, dbService } from "../fbase";
+import { addDoc, collection, getDocs, query } from "firebase/firestore";
 
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(true);
   const [error, setError] = useState("");
+  const [userName, setUserName] = useState("");
   const auth = getAuth();
   // email, password 분류
   const onChange = (event) => {
@@ -22,8 +25,21 @@ function Login(props) {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
+    } else if (name === "username") {
+      setUserName(value);
     }
   };
+
+  async function addUser(userObj) {
+    try {
+      const doc = await addDoc(collection(dbService,"user"),{
+        userName,
+        userId : userObj.id
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -32,6 +48,12 @@ function Login(props) {
       if (newAccount) {
         // 이메일과 비밀번호를 통해 새 계정 생성
         data = await createUserWithEmailAndPassword(auth, email, password);
+        authService.onAuthStateChanged((user)=> {
+          if (user) {
+            addUser(user);
+          }
+        });
+        console.log("Document written with ID: ", doc.id);
       } else {
         data = await signInWithEmailAndPassword(auth, email, password);
       }
@@ -53,6 +75,21 @@ function Login(props) {
       </Modal.Header>
       <Modal.Body>
         <div>
+          {newAccount ? (
+            <div>
+            <input
+              name="username"
+              type="text"
+              placeholder="이름"
+              required
+              value={userName}
+              onChange={onChange}
+            />
+          </div>
+          ) : (
+            <>
+            </>
+          )}
           <input
             name="email"
             type="text"
@@ -76,7 +113,7 @@ function Login(props) {
           />
           {error}
           <span onClick={toggleAccount}>
-            {newAccount ? "Sign In" : "Create Account"}
+            {newAccount ? "로그인" : "새로운 계정 만들기"}
           </span>
         </div>
       </Modal.Body>
