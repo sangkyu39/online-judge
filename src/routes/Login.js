@@ -60,7 +60,7 @@ function Login(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">로그인</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter" className="submit-title">로그인</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="container">
@@ -95,9 +95,9 @@ function Login(props) {
           />
           </div>
           {error}
-          <span onClick={toggleAccount}>
+          <h6 onClick={toggleAccount} className="select-mode">
             {newAccount ? "로그인" : "새로운 계정 만들기"}
-          </span>
+          </h6>
         </div>
       </Modal.Body>
     </Modal>
