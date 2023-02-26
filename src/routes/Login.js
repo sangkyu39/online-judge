@@ -13,7 +13,7 @@ import "./Login.css";
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newAccount, setNewAccount] = useState(true);
+  const [newAccount, setNewAccount] = useState(false);
   const [error, setError] = useState("");
   const [userName, setUserName] = useState("");
   const auth = getAuth();
@@ -55,7 +55,7 @@ function Login(props) {
   return (
     <Modal
       {...props}
-      size="lg"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -63,7 +63,7 @@ function Login(props) {
         <Modal.Title id="contained-modal-title-vcenter" className="submit-title">로그인</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="container">
+        <div className="container" id="login-modal">
           <div className="text-div">
           <input
             name="email"

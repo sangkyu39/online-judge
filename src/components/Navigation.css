@@ -1,5 +1,20 @@
 .menu:hover {
     background-color: white;
+}
+
+.color-nav {
+    background-color: #8DA4D0;
+}
+
+.menu:hover {
     border-radius: 8px;
     color : black;
+}
+
+.menu {
+    border-radius: 8px;
+}
+
+.text-nav {
+    font-weight: 600;
 }

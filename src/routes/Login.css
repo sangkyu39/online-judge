@@ -1,4 +1,4 @@
-.text-area {
+#login-modal .text-area {
     /* width: 100%;
     height: 48px;
     padding: 0 10px;
@@ -9,30 +9,26 @@
     border : 3px solid #8DA4D0;
     width: 100%;
     height: 3rem;
-    margin : 3% 0;
+    margin : 2% 0;
 }
 
-input:focus {
+#login-modal input:focus {
    outline: none; 
 }
-.submit-btn {
+#login-modal .submit-btn {
     color: white;
     border : none;
     background-color: #8DA4D0;
 }
 
-.submit-btn:hover {
-    background-color: #8DA4D0;
-}
-
-.text-div {
+#login-modal .text-div {
     text-align: center;;
 }
 
-.submit-title {
+#login-modal .submit-title {
     font-weight: bold;
 }
 
-.select-mode {
+#login-modal .select-mode {
     color : #8DA4D0;
 }

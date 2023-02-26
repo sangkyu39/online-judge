@@ -9,6 +9,7 @@ import React, { useState, useEffect } from "react";
 import Login from "../routes/Login";
 import "./Navigation.css";
 import { getAuth, signOut } from "firebase/auth";
+import mainLogo from "../main-logo.png";
 
 function Navigation(props) {
   const [modalShow, setModalShow] = useState(false);
@@ -20,16 +21,23 @@ function Navigation(props) {
   }
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar variant="dark" className="color-nav">
       <Container>
-        <Navbar.Brand href="/">Online Judge</Navbar.Brand>
+        <Navbar.Brand href="/" className="text-nav">
+        S2S2
+        </Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/problems" className="menu">
             문제
           </Nav.Link>
-          <Nav.Link href="/add" className="menu">
-            출제
-          </Nav.Link>
+          {props.isLoggedIn ? (
+            <Nav.Link href="/add" className="menu">
+              출제
+            </Nav.Link>
+          ) : (
+            <></>
+          )}
+
           {props.isLoggedIn ? (
             <Nav.Link onClick={onLogOut} className="menu">
               로그 아웃
@@ -40,7 +48,7 @@ function Navigation(props) {
                 로그인
               </Nav.Link>
 
-              <Login show={modalShow} onHide={() => setModalShow(false)}/>
+              <Login show={modalShow} onHide={() => setModalShow(false)} />
             </div>
           )}
         </Nav>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import "./Problem.css";
 import { dbService } from "../fbase";
 import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import {
@@ -20,18 +20,14 @@ function Problem(props) {
   const input = location.state.input;
   const output = location.state.output;
   let [code, setCode] = useState();
-  let [language, setLanguage] = useState();
+  let [language, setLanguage] = useState(50);
   let [result, setResult] = useState("미채점");
 
   console.log(input);
   async function scoring() {
     setResult("채점 중...");
     for (let i = 0; i < location.state.input.length; i++) {
-      console.log(input);
-      console.log(language);
-      console.log(code);
       const JUDGEAPI = process.env.REACT_APP_JUDGEAPI;
-      console.log(JUDGEAPI);
       const response = await fetch(
         "https://judge0-ce.p.rapidapi.com/submissions",
         {
@@ -74,63 +70,59 @@ function Problem(props) {
 
       if (jsonGetSolution.stdout) {
         const codeOutput = atob(jsonGetSolution.stdout);
-
-        console.log(
-          `Results :\n${codeOutput}\nExecution Time : ${jsonGetSolution.time} Secs Expected_output : ${jsonGetSolution.message} `
-        );
         codeOutput === output[i] || codeOutput === output[i] + "\n"
           ? setResult("정답")
           : setResult("오답");
       } else if (jsonGetSolution.stderr) {
         const error = atob(jsonGetSolution.stderr);
 
-        console.log(error);
+        setResult(error);
       } else {
         const compilation_error = atob(jsonGetSolution.compile_output);
-        console.log(compilation_error);
-      } 
+        setResult(compilation_error);
+      }
     }
   }
 
   return (
-    <div>
-      <h1
-        onClick={() => {
-          console.log(input);
-        }}
-      >
-        Problem
-      </h1>
-      <h5>{title}</h5>
-      <h6>{detail}</h6>
-      <div className="col-md-2">
-        <select
-          id="language-box"
-          value={language}
-          onChange={(e) => {
-            setLanguage(e.target.value);
-          }}
-        >
-          <option value="50">C</option>
-          <option value="71">Python</option>
-        </select>
-        <button
-          type="button"
-          className="btn btn-primary submit-btn"
-          onClick={() => {
-            console.log("submitted");
-            scoring();
-          }}
-        >
-          제출
-        </button>
+    <div id="problem" className="container">
+      <h1 className="title">{title}</h1>
+      <h6 className="detail">{detail}</h6>
+
+      <div className="submit-box row">
+        <h6 className="col-md-8 result">{result}</h6>
+        <div className="select-box-div col-md-2">
+          <select
+            className="select-box"
+            id="language-box"
+            value={language}
+            onChange={(e) => {
+              setLanguage(e.target.value);
+            }}
+          >
+            <option value="50">C</option>
+            <option value="71">Python</option>
+          </select>
+        </div>
+        <div className="button-div col-md-2">
+          <button
+            type="button"
+            className="btn btn-primary submit-btn"
+            onClick={() => {
+              scoring();
+            }}
+          >
+            제출
+          </button>
+        </div>
       </div>
+
       <textarea
+        className="code"
         onChange={(e) => {
           setCode(e.target.value);
         }}
       ></textarea>
-      <h6>{ result }</h6>
     </div>
   );
 }

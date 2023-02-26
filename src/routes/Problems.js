@@ -30,32 +30,15 @@ function Problems() {
 
   useEffect(() => {
     getProblems();
-
-    // const q = query(
-    //   collection(dbService, "problem"),
-    //   orderBy("createdAt", "desc")
-    // );
-    // console.log(q);
-    // onSnapshot(q, (snapshot) => {
-    //   const copyProblems = snapshot.docs.map((doc) => (       
-    //     {
-    //       id: doc.id,
-    //     ...doc.data(),
-    //   }));
-    //   setProblems(copyProblems);
-    //   console.log(copyProblems);
-    // });
-
-
   }, []);
 
   return (
-    <div className="container">
-      <h1 id="title">Problems</h1>
+    <div id="problems"className="container">
+      <h1 className="title">문제</h1>
       <div className="problems-list">
         {problems.map(function (problem) {
           return (
-            <div key={problem.id} className="problem">
+            <div key={problem.id} className="problem-div">
               <h5
                 onClick={() => {
                   navigate(`/problem/${problem.id}`, {
@@ -71,7 +54,7 @@ function Problems() {
               >
                 {problem.title}
               </h5>
-              <h6>
+              <h6 className="problem-detail">
                 Made by {problem.makerId}
               </h6>
             </div>

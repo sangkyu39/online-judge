@@ -1,7 +1,7 @@
 import AppRouter from "./Router";
 import React, { useState, useEffect } from "react";
 import { authService } from "../fbase";
-
+import "./App.css";
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,7 +20,13 @@ function App() {
   }, []);
 
   return (
-      <>{init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj}/> : "Initializing..."}</>
+    <div id="window">
+      {init ? (
+        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
+      ) : (
+        <></>
+      )}
+    </div>
   );
 }
 

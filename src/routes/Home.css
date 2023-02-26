@@ -1,0 +1,22 @@
+.home-img {
+    width: 50%;
+    margin :auto;
+    display: block;
+    margin-top: 10%;
+}
+
+.home-img-div {
+    text-align: center;
+}
+
+.home-detail {
+    text-align: center;
+    width: 70%;
+    margin: auto;
+    font-weight: 550;
+    font-size: 120%;
+}
+
+.home-detail-div {
+    margin-top: 5%;
+}

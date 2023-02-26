@@ -1,10 +1,101 @@
-.text-area {
+#add .text-area {
     height: 10rem;
     width: 60%;
     resize: none;
-    margin: 3%;
 }
 
-.form-area {
-    height: 80%;
+#add .index {
+    text-align: center;
+    margin : 3%;
+}
+
+#add .add-div {
+    /* background-color: rgba(141, 164, 208, 30%); */
+    border : 5px solid #8da4d0;
+    border-radius: 10px;
+    height: 30rem;
+}
+
+#add .q-div {
+    border-right: #8da4d0 3px solid;
+    margin: 1%;
+    margin-right: 0;
+    padding : 0 0;
+    padding-right: 1%;
+}
+
+#add .q-title {
+    width: 100%;
+    margin-bottom: 3%;
+    height: 10%;
+    font-weight:500;
+}
+
+#add .q-detail {
+    width: 100%;
+    resize: none;
+    height: 86%;
+}
+
+#add .ex-div {
+    margin : 1%;
+}
+
+#add .ex-put {
+    width: 100%;
+}
+
+#add .show-ex {
+
+}
+
+#add .submit-btn {
+    margin: auto;
+    color: white;
+    border : none;
+    background-color: #8DA4D0;
+    border-radius: 10px;
+    width: 25%;
+    height: 3rem;
+}
+
+#add .submit-btn:hover {
+    color : #8DA4D0;
+    background-color: white;
+    border : 3px solid #8DA4D0
+}
+
+#add .submit-btn-div {
+    margin : 1%;
+    text-align: center;
+}
+
+#add .ex-btn-div {
+    text-align: center;
+    margin: 1%;
+}
+
+#add .ex-btn {
+    color: white;
+    background-color: #8DA4D0;
+    border: none;
+    border-radius: 10px;
+    padding: 1% 2%;
+    margin: auto;
+}
+
+#add .ex-btn:hover{
+    color: #8DA4D0;
+    background-color: white;
+    border: 3px solid #8DA4D0;
+}
+
+#add .ex-title {
+    text-align: center;
+    border-bottom: #8DA4D0 3px solid;
+    padding-bottom: 3%;
+}
+
+#add .ex-value-div {
+    text-align: center;
 }

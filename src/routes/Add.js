@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Add.css";
 import { dbService } from "../fbase";
 import { addDoc, collection, getDocs, query } from "firebase/firestore";
-
+import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 function Add(params) {
   const [problemCnt, setProblemCnt] = useState(0);
   const [title, setTitle] = useState("");
@@ -12,7 +12,7 @@ function Add(params) {
   const userObj = params.userObj;
   const [inputArr, setInputArr] = useState([]);
   const [outputArr, setOutputArr] = useState([]);
-
+  let navigate = useNavigate();
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -29,7 +29,6 @@ function Add(params) {
   };
 
   function addArr(event) {
-    console.log("clicked");
     setInput("");
     setOutput("");
     const copyInputArr = [...inputArr, input];
@@ -48,7 +47,6 @@ function Add(params) {
         outputArr,
         makerId: userObj.email,
       });
-      console.log("Document written with ID: ", docRef.id);
 
       setTitle("");
       setDetail("");
@@ -57,76 +55,89 @@ function Add(params) {
     } catch (error) {
       console.log(error);
     }
+    navigate("/problems");
   }
 
   return (
-    <div className="container">
-      <h4>문제 추가</h4>
-      <h5>문제 제목</h5>
-      <input
-        type="text"
-        value={title}
-        onChange={onChange}
-        name="title"
-        required
-      />
-      <br />
-      <h5>문제 설명</h5>
-      <textarea
-        value={detail}
-        onChange={onChange}
-        name="detail"
-        className="text-area"
-        required
-      />
-      <br />
-      <div className="row">
-        <div className="col">
-          <h5>입력 예시</h5>
-          {inputArr.map(function (input) {
-            return (
-              <div key={input + Date.now}>
-                <h6>{input}</h6>
-              </div>
-            );
-          })}
+    <div id="add" className="container">
+      <h1 className="index">문제 출제</h1>
+      <div className="row add-div">
+        {/* 문제 제목과 설명 공간 */}
+        <div className="q-div col">
+          <input
+            placeholder="문제 이름을 입력해주세요"
+            className="q-title"
+            type="text"
+            value={title}
+            onChange={onChange}
+            name="title"
+            required
+          />
+          <textarea
+            placeholder="문제 설명을 입력해주세요"
+            value={detail}
+            onChange={onChange}
+            name="detail"
+            className="q-detail"
+            required
+          />
         </div>
-        <div className="col">
-          <h5>출력 예시</h5>
-          {outputArr.map(function (output) {
-            return (
-              <div key={output + Date.now}>
-                <h6>{output}</h6>
-              </div>
-            );
-          })}
+        {/* 입력과 출력 예시 공간 */}
+        <div className="ex-div col">
+          <div className="row show-ex">
+            <div className="col">
+              <h5 className="ex-title">입력 예시</h5>
+              {inputArr.map(function (input, i) {
+                return (
+                  <div className="ex-value-div" key={i}>
+                    <h6 className="ex-value">{input}</h6>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="col">
+              <h5 className="ex-title">출력 예시</h5>
+              {outputArr.map(function (output, i) {
+                return (
+                  <div className="ex-value-div" key={i}>
+                    <h6 className="ex-value">{output}</h6>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="row ex-put-div">
+            <textarea
+              placeholder="채점할 입력을 입력해주세요"
+              value={input}
+              onChange={onChange}
+              name="input"
+              className="ex-put col"
+            />
+            <textarea
+              placeholder="채점할 출력을 입력해주세요"
+              value={output}
+              onChange={onChange}
+              name="output"
+              className="ex-put col"
+              required
+            />
+          </div>
+          <div className="ex-btn-div">
+            <button className="row ex-btn" onClick={addArr}>
+              예제 추가
+            </button>
+          </div>
         </div>
       </div>
-      <h5>입력</h5>
-      <textarea
-        value={input}
-        onChange={onChange}
-        name="input"
-        className="text-area"
-      />
-      <br />
-      <h5>출력</h5>
-      <textarea
-        value={output}
-        onChange={onChange}
-        name="output"
-        className="text-area"
-        required
-      />
-      <button className="btn btn-light" onClick={addArr}>
-        예제 추가
-      </button>
-      <input
-        type="button"
-        className="btn btn-primary"
-        value="추가"
-        onClick={onSubmit}
-      ></input>
+      <div className="submit-btn-div">
+        <input
+          type="button"
+          className="submit-btn"
+          value="추가"
+          onClick={onSubmit}
+        ></input>
+      </div>
     </div>
   );
 }
