@@ -94,8 +94,19 @@
     text-align: center;
     border-bottom: #8DA4D0 3px solid;
     padding-bottom: 3%;
+    margin: 0 2%;
 }
 
 #add .ex-value-div {
     text-align: center;
+}
+
+#add .ex-put {
+    resize: none;
+    margin: 1%;
+}
+
+#add .ex-value{
+    border-bottom: #8DA4D0 solid 2px;
+    margin : 0 2%;
 }

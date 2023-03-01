@@ -84,26 +84,20 @@ function Add(params) {
         </div>
         {/* 입력과 출력 예시 공간 */}
         <div className="ex-div col">
-          <div className="row show-ex">
-            <div className="col">
-              <h5 className="ex-title">입력 예시</h5>
-              {inputArr.map(function (input, i) {
-                return (
-                  <div className="ex-value-div" key={i}>
-                    <h6 className="ex-value">{input}</h6>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="col">
-              <h5 className="ex-title">출력 예시</h5>
-              {outputArr.map(function (output, i) {
-                return (
-                  <div className="ex-value-div" key={i}>
-                    <h6 className="ex-value">{output}</h6>
-                  </div>
-                );
-              })}
+          <div className="show-ex">
+            <div className="row">
+              <h5 className="ex-title col">입력 예시</h5>
+              <h5 className="ex-title col">출력 예시</h5>
+              <div>
+                {inputArr.map(function (input, i) {
+                  return (
+                    <div className="ex-value-div row" key={i}>
+                      <pre className="ex-value col ">{input}</pre>
+                      <pre className="ex-value col">{outputArr[i]}</pre>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
           <div className="row ex-put-div">
